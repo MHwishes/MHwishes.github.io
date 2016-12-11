@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+    
+    <entry>
+      <title><![CDATA[Hello World]]></title>
+      <url>http://yoursite.com/2016/12/12/hello-world/</url>
+      <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.<br><a id="more"></a></p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[聊聊git的那些事]]></title>
+      <url>http://yoursite.com/2016/12/11/%E8%81%8A%E8%81%8Agit%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B/</url>
+      <content type="html"><![CDATA[<p>git是什么？一个高端大气上档次的分布式版本控制系统。<br>   相信小伙伴们对于git 并不陌生。对它当中文件的三种状态：已修改（modified），已暂存（staged），已提交（committed）很熟悉啦，只要是写代码就天天见。对应的三种操作：</p>
+<ul>
+<li><code>git add XX</code>:文件修改添加到暂存区</li>
+<li><code>git commit -m &quot;XX&quot;</code>:把暂存区的所有内容提交到当前分支</li>
+<li><code>git push XXX</code>:把本地的代码提交到远程</li>
+</ul>
+<p>哈哈，这三条命令小伙伴们估计都十分清楚，毕竟天天的都在使用，下面我们来说点别的吧。</p>
+<h4 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h4><p> 哎呀，把文件改的乱成一团糟了，想看看以前写的，怎么办？版本回退呗（两步走）。</p>
+<ol>
+<li>用<code>git log</code>查看你的历史记录，这条命令会显示从最近到最远的提交日志，你会看见很多类似<code>567893455...897655....</code>的数字，这就是你的版本号啦。</li>
+<li>用<code>git reset --hard  56789</code>这个命令就可以回到这个版本号所代表的版本啦。（版本号用哈西值表示，很长，回退时只用输如前几个就好了，git会自动帮你找的。）</li>
+</ol>
+<h4 id="撤销修改"><a href="#撤销修改" class="headerlink" title="撤销修改"></a>撤销修改</h4><p>当突然发现这次的修改是没有意义的，怎么办？撤销。加入你当前修改的文件的 <code>aaa.js</code>,那么就用<code>git checkout -- aaa.js</code>，它会丢弃你对工作区的修改。</p>
+<blockquote>
+<p>如果你此时还没有add到暂存区，那么用这个命令后就会回到和版本库一样的状态了。若果此时已经add了，好吧，那就会回到添加到暂存区后的状态。</p>
+</blockquote>
+<h4 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h4><p>假如你已经git add 和commit 了一个文件<code>bbb.js</code>,然后你在文件管理器中却把bbb.js给删了，用git status看下，它会告诉你删除了bbb.js这个文件。这里就有两种情况了：</p>
+<ul>
+<li>你确实是打算从git 版本库里删除这个文件，那就先用<code>git rm  bbb.js</code>删掉，再用<code>git commit -m &quot; XXX &quot;</code>一下，你就从版本库里删掉了。</li>
+<li>如果你是不小心误删的，好吧，没有关系，<code>git checkout -- bbb.js</code>你就可以找回来了，因为<code>git checkout</code>其实是用版本库里的版本替换工作区的版本。</li>
+</ul>
+<h4 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h4><p>很多小伙伴们在一起开发时写代码时可能会遇到这样的尴尬情况，你的代码还没写完，如果提交代码到主分支可能会影响整个系统代码使别人的代码无法工作。如果不提交要是突然电脑坏了代码都找不到了，那该怎么办？又或者这样，当你正开发的好嗨皮的时候，boss来了让你干个其它的很紧急的活吧，这时候怎么弄？分支可以帮你解决这个问题。</p>
+<ol>
+<li><code>git checkout -b dev</code>建立一个叫div的分支并切换到该分支<blockquote>
+<p><code>git checkout</code>命令加上-b参数表示创建并切换，相当于<code>git branch dev</code>和 <code>git checkout dev</code>两条命令</p>
+</blockquote>
+</li>
+<li><code>git branch</code>命令查看当前所有的分支，并在当前分支前会标一个 <code>*</code> 号</li>
+<li>完成dev上的开发提交后用<code>git checkout master</code>可以切回master分支了</li>
+<li>如果想在主分支上看见dev上开发的成果，那就合并分支吧，就dev合并在主分支上<code>git merge dev</code>，合并后就可以在master上看见dev的提交了。</li>
+<li>合并完了就可以删除dev分支了，用这个命令<code>git branch -d dev</code>就可以啦。</li>
+</ol>
+<blockquote>
+<p>用上面方法合并分支时，Git会用Fast forward模式，但这种模式下，删除分支后，会丢掉分支信息。如果要强制禁用Fast forward模式，命令长这样<code>git merge --no-ff -m &quot;merge with no-ff&quot; dev</code>(其中–no-ff表示禁用Fast forward模式)，Git就会在merge时生成一个新的commit，这样，从分支历史上就可以看出分支信息。</p>
+</blockquote>
+<p>没有用–no-ff的合并长这样：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3023838-ddbfd53761b2291f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="用Fast forward模式"><br>用–no-ff的合并长这样：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3023838-301b25d08f7c0518.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="不使用Fast forward模式"></p>
+<p><strong>小插曲</strong>：</p>
+<ul>
+<li>我们要在新分支上工作时，可以把当前的工作区的东西暂存起来,用<code>git stash</code>命令,再次回来可以用<code>git stash pop</code>，回到工作现场。</li>
+<li>合并分支还有另一个办法<code>rebaseing</code>,它和<code>merge</code>的区别,就参考这篇<a href="http://www.jianshu.com/p/f23f72251abc" target="_blank" rel="external">文章</a>.</li>
+</ul>
+<p>####解决冲突<br>有时候，当master分支和dev分支各自都分别有新的提交,git 合并时就会出现冲突，有时git 会自动解决冲突，但有时就需要手动解决冲突了。我常用的IDE是WebStorm,它提供了很好用的解决冲突的插件。打开WebStorm -&gt;用快捷键<code>Ctrl +shift+A</code>打开窗口  -&gt; 输入<code>Resolve Conflicts...</code>就可以打开解决冲突的工具啦，很好用的哦！<br>解决完冲突后再次提交代码就OK啦,用<code>git log --graph</code>命令可以看到分支合并图。</p>
+<p>　　最后，创建自己的密钥并在github上配置，这样使用git命令时不需要每次输入密码，参见<a href="https://segmentfault.com/a/1190000002645623" target="_blank" rel="external">教程</a>,再给大家推荐一个很好玩的闯关的<a href="https://codingstyle.cn/topics/51" target="_blank" rel="external">游戏</a>吧，如果实在过不去了，就看看参考答案吧！（参考答案见参考文2,3,4,5,6）</p>
+<p>参考文章：</p>
+<p>1.<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000</a><br>2.<a href="https://codingstyle.cn/topics/57" target="_blank" rel="external">https://codingstyle.cn/topics/57</a>　(2~10关)<br>3.<a href="https://codingstyle.cn/topics/67" target="_blank" rel="external">https://codingstyle.cn/topics/67</a>  (11~20关)<br>4.<a href="https://codingstyle.cn/topics/73" target="_blank" rel="external">https://codingstyle.cn/topics/73</a>  (21~30关)<br>5.<a href="https://codingstyle.cn/topics/178" target="_blank" rel="external">https://codingstyle.cn/topics/178</a>  (31~40关)<br>6.<a href="https://codingstyle.cn/topics/181" target="_blank" rel="external">https://codingstyle.cn/topics/181</a> (41～55关)</p>
+]]></content>
+    </entry>
+    
+  
+  
+</search>
